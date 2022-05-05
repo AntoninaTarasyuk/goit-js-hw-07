@@ -30,11 +30,12 @@ function onImageClick(event) {
   const instance = basicLightbox.create(`<img src="${bigImageUrl}">`)
   instance.show()
 
-  window.addEventListener('keydown', onEscKeyPress, { once: true });
+  window.addEventListener('keydown', onEscKeyPress);
   
   function onEscKeyPress(event) {
     if (event.code === 'Escape') {
       instance.close();
+      window.removeEventListener('keydown', onEscKeyPress);
     };
   };
 };
