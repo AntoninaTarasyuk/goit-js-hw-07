@@ -7,15 +7,15 @@ function createGalleryItemsMarkup(images) {
   return images.map(({ preview, original, description }) => {
     return `
     <div class="gallery__item">
-    <a class="gallery__link" href="large-image.jpg">
-      <img
-        class="gallery__image"
-        src="${preview}"
-        data-source="${original}"
-        alt="${description}"
-      />
-    </a>
-</div>`}).join('');
+      <a class="gallery__link" href="large-image.jpg">
+        <img
+          class="gallery__image"
+          src="${preview}"
+          data-source="${original}"
+          alt="${description}"
+        />
+      </a>
+    </div>`}).join('');
 }
 
 galleryContainer.insertAdjacentHTML('beforeend', galleryItemsMarkup);
@@ -27,15 +27,17 @@ function onImageClick(event) {
   if (event.target.nodeName !== 'IMG') { return; };
   
   const bigImageUrl = event.target.dataset.source;
-  const instance = basicLightbox.create(`<img src="${bigImageUrl}">`)
-  instance.show()
+  const instance = basicLightbox.create(`<img src="${bigImageUrl}">`);
+  instance.show();
 
   window.addEventListener('keydown', onEscKeyPress);
+  window.addEventListener('click', onEscKeyPress);
   
   function onEscKeyPress(event) {
     if (event.code === 'Escape') {
       instance.close();
       window.removeEventListener('keydown', onEscKeyPress);
+      window.removeEventListener('click', onEscKeyPress);
     };
   };
 };
