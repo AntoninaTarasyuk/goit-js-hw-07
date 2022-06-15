@@ -2,7 +2,7 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
 const galleryContainer = document.querySelector('.gallery');
-const galleryItemsMarkup = createGalleryItemsMarkup(galleryItems);
+galleryContainer.innerHTML = createGalleryItemsMarkup(galleryItems);
 
 function createGalleryItemsMarkup(images) {
   return images.map(({ preview, original, description }) => {
@@ -14,7 +14,7 @@ function createGalleryItemsMarkup(images) {
     </li>`}).join('');
 }
 
-galleryContainer.insertAdjacentHTML('beforeend', galleryItemsMarkup);
+new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
 
-var lightBox = new SimpleLightbox('.gallery a', { captionsData:'alt', captionDelay:250});
-lightBox.on('show.simplelightbox');
+// const galleryItemsMarkup = createGalleryItemsMarkup(galleryItems);
+// galleryContainer.insertAdjacentHTML('beforeend', galleryItemsMarkup);
